@@ -2,11 +2,14 @@
 package views;
 
 import components.Airplane;
+import java.awt.Font;
+import javax.swing.JLabel;
 
 
 public class GamePanel extends javax.swing.JPanel {
 
     private Airplane plane;
+    private JLabel lifePlane;
 
     /**
      * Creates new form GamePanel
@@ -22,11 +25,27 @@ public class GamePanel extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
+    
     public Airplane getPlane() {
         return plane;
     }
     
+    public void setLifePlane(short life) {
+        this.lifePlane = new JLabel("Life: " + life);
+        Font font = new Font(Font.SANS_SERIF,Font.BOLD, 20);
+        this.lifePlane.setFont(font);
+        this.lifePlane.setBounds(0,0,100,100);
+        this.add(this.lifePlane);
+        this.revalidate();
+        this.repaint();
+    }
     
+    public void changeLife(short life) {
+        if (life < 0) {
+            life = 0;
+        }
+        this.lifePlane.setText("Life: " + life);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

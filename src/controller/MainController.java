@@ -11,6 +11,7 @@ import components.CollisionEvent;
 import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.Timer;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import views.GameFrame;
 import views.GamePanel;
@@ -28,7 +29,6 @@ public class MainController {
     public MainController() {
         this.frame = new GameFrame();
         this.frame.setLocationRelativeTo(null);
-        this.frame.repaint();
         initiateGame();
     }
 
@@ -36,6 +36,8 @@ public class MainController {
 
         this.panel = new GamePanel();
         this.frame.setContentPane(panel);
+        this.frame.revalidate();
+        this.frame.repaint();
 
         asteroids = new ArrayList<>();
         String messageControl = "W - mover nave hacia arriba\n";
@@ -44,8 +46,10 @@ public class MainController {
         messageControl += "D - mover nave hacia la derecha";
         JOptionPane.showMessageDialog(this.frame, messageControl, "Controles", JOptionPane.INFORMATION_MESSAGE);
 
+        
         this.plane = new Airplane(this.panel);
         this.panel.setPlane(this.plane);
+        this.panel.setLifePlane(this.plane.getLife());
         this.planeController = new PlaneController(this.panel, this.frame);
 
         gameTimer = new Timer();
@@ -74,19 +78,20 @@ public class MainController {
 
             int horizontal = 0;
             int vertical = 0;
-            if (planeController.getNorth().get()) {
+            if (planeController.getNorth().get() && plane.getY()> 0) {
                 horizontal--;
             }
-            if (planeController.getSouth().get()) {
+            if (planeController.getSouth().get() && plane.getY() < (panel.getHeight() - plane.getHeight())) {
                 horizontal++;
             }
-            if (planeController.getEast().get()) {
+            if (planeController.getEast().get() && plane.getX() < (panel.getWidth() - plane.getWidth())) {
                 vertical++;
             }
-            if (planeController.getWest().get()) {
+            if (planeController.getWest().get() && plane.getX() > 0) {
                 vertical--;
             }
             plane.movePlane(vertical, horizontal);
+            
             ArrayList<Asteroid> asteroidsClone = (ArrayList<Asteroid>) asteroids.clone();
             for (Asteroid asteroid : asteroidsClone) {
                 asteroid.move();
@@ -104,6 +109,7 @@ public class MainController {
                     panel.repaint();
                 }
             }
+            
         }
 
         private void stopGame() {
@@ -112,9 +118,7 @@ public class MainController {
             gameTimer.cancel();
             gameTimer.purge();
             JOptionPane.showMessageDialog(frame, "Game Over", "YOU LOSE", JOptionPane.WARNING_MESSAGE);
-            frame.removeAll();
             initiateGame();
-            System.out.println("HEY");
         }
 
     }

@@ -24,6 +24,7 @@ public class PlaneController {
     public PlaneController(GamePanel panel, GameFrame frame) {
         this.frame = frame;
         this.panel = panel;
+        
         this.plane = this.panel.getPlane();
         this.plane.addCollisionListener(new CollisionListener() {
             @Override
@@ -31,6 +32,7 @@ public class PlaneController {
                Asteroid asteroid = (Asteroid) evt.getCollisionObject();
                Airplane plane = (Airplane) evt.getSource();
                plane.reduceLife(asteroid.getDamage());
+               panel.changeLife(plane.getLife());
             }
         });
         
