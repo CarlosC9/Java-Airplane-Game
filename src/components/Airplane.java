@@ -6,7 +6,7 @@ public class Airplane extends ImageComponent {
 
     private int speed;
     
-    private CollisionListener collisionListener;
+    private CollisionListener collisionListener; //receptor 
     
     private short life;
     

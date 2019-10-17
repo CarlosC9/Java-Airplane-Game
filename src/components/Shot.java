@@ -11,10 +11,7 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import javax.swing.JComponent;
 
-/**
- *
- * @author Luat Dinh Bui
- */
+
 public class Shot extends JComponent implements Serializable {
 
     //Determines the orientation of the "Shot" relative to parent
@@ -86,9 +83,7 @@ public class Shot extends JComponent implements Serializable {
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.RED);
-        g2.drawOval(0, 0, 5, 5);
+        
     }
     
     

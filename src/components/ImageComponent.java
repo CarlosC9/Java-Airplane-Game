@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 
 public abstract class ImageComponent extends JComponent implements Serializable {
     
+    
     protected String imgSource;
     protected BufferedImage image;
     
