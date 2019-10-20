@@ -11,10 +11,10 @@ import components.CollisionEvent;
 import java.util.ArrayList;
 import java.util.TimerTask;
 import java.util.Timer;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import views.GameFrame;
 import views.GamePanel;
+import views.StartPanel;
 
 public class MainController {
 
@@ -40,14 +40,21 @@ public class MainController {
         this.frame.repaint();
 
         asteroids = new ArrayList<>();
-        String messageControl = "W - mover nave hacia arriba\n";
-        messageControl += "S -  mover nave hacia abajo\n";
-        messageControl += "A - mover nave hacia la izquierda\n";
-        messageControl += "D - mover nave hacia la derecha";
-        JOptionPane.showMessageDialog(this.frame, messageControl, "Controles", JOptionPane.INFORMATION_MESSAGE);
+        short vidas = 0;
+        
+        boolean valid = false;
+        do {
+        try {
+            StartPanel startPanel = new StartPanel(this.frame, true);
+            valid = true;
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this.frame, "Debes introducir un número"
+                    + " entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }} while(!valid);
 
         
         this.plane = new Airplane(this.panel);
+        this.plane.setLife(vidas);
         this.panel.setPlane(this.plane);
         this.panel.setLifePlane(this.plane.getLife());
         this.planeController = new PlaneController(this.panel, this.frame);
