@@ -24,7 +24,6 @@ public class GameFrame extends javax.swing.JFrame {
         initComponents();
         this.setSize(500, 700);
         this.setVisible(true);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
     }
 

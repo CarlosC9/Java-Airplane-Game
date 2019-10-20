@@ -84,7 +84,6 @@ public class Airplane extends ImageComponent {
     
     public void reduceLife(short damage) {
         this.life -= damage;
-        System.out.println(this.life);
     }
     
     

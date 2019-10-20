@@ -5,7 +5,6 @@
  */
 package views;
 
-import javax.swing.JTextField;
 
 /**
  *
@@ -13,12 +12,15 @@ import javax.swing.JTextField;
  */
 public class StartPanel extends javax.swing.JDialog {
 
-    /**
-     * Creates new form StartPanel
-     */
+   private boolean confirm;
+    
     public StartPanel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.confirm = false;
+        this.setTitle("Information game");
+        this.setLocationRelativeTo(parent);
+        this.setVisible(true);
     }
 
     /**
@@ -36,6 +38,7 @@ public class StartPanel extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lifeInput = new javax.swing.JTextField();
+        confirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,10 +52,16 @@ public class StartPanel extends javax.swing.JDialog {
 
         jLabel5.setText("Life:");
 
-        lifeInput.setText("jTextField1");
         lifeInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lifeInputActionPerformed(evt);
+            }
+        });
+
+        confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
             }
         });
 
@@ -67,11 +76,12 @@ public class StartPanel extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(confirmButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(lifeInput))
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +99,9 @@ public class StartPanel extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(lifeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(confirmButton)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,9 +111,15 @@ public class StartPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_lifeInputActionPerformed
 
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        this.confirm = true;
+        this.dispose();
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -110,8 +128,12 @@ public class StartPanel extends javax.swing.JDialog {
     private javax.swing.JTextField lifeInput;
     // End of variables declaration//GEN-END:variables
 
-    public JTextField getLifeInput() {
-        return lifeInput;
+    public String getLife() {
+        return lifeInput.getText();
+    }
+
+    public boolean isConfirm() {
+        return confirm;
     }
 
 

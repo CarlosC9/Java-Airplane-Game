@@ -33,6 +33,7 @@ public class PlaneController {
                Airplane plane = (Airplane) evt.getSource();
                plane.reduceLife(asteroid.getDamage());
                panel.changeLife(plane.getLife());
+               System.out.println("The airplane collided!");
             }
         });
         

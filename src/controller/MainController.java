@@ -40,12 +40,17 @@ public class MainController {
         this.frame.repaint();
 
         asteroids = new ArrayList<>();
-        short vidas = 0;
+        short life = 0;
         
         boolean valid = false;
         do {
         try {
             StartPanel startPanel = new StartPanel(this.frame, true);
+            if (!startPanel.isConfirm()) {
+                this.frame.dispose();
+                System.exit(0);
+            }
+            life = Short.parseShort(startPanel.getLife());
             valid = true;
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this.frame, "Debes introducir un número"
@@ -54,7 +59,7 @@ public class MainController {
 
         
         this.plane = new Airplane(this.panel);
-        this.plane.setLife(vidas);
+        this.plane.setLife(life);
         this.panel.setPlane(this.plane);
         this.panel.setLifePlane(this.plane.getLife());
         this.planeController = new PlaneController(this.panel, this.frame);
